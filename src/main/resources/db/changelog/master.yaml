@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      labels: initial-tables
+      author: "Tanay PrabhuDesai"
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: sku
+                  type: varchar
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: int
+                  constraints:
+                    nullable: false

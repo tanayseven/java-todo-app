@@ -1,21 +1,35 @@
 package tech.tanay.todolist.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.opencsv.exceptions.CsvBeanIntrospectionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import tech.tanay.todolist.ProductEntity;
+import tech.tanay.todolist.ProductRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class ProductController {
 
+    @Autowired
+    private ProductRepository productRepository;
+
     @GetMapping("/products")
     public List<ProductEntity> getProducts() {
-        var products = List.of(
-            new ProductEntity("sku1", "Product 1", 100),
-            new ProductEntity("sku2", "Product 2", 200),
-            new ProductEntity("sku3", "Product 3", 300)
-        );
-        return products;
+        return null;
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<?> addProduct(@RequestBody ProductEntity product) {
+        productRepository.save(product);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/product/{sku}")
+    public ProductEntity getProduct(@PathVariable String sku) {
+        return productRepository.findById(sku).orElse(null);
     }
 }

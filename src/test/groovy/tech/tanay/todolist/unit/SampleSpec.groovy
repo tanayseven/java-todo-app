@@ -1,4 +1,4 @@
-package tech.tanay.todolist
+package tech.tanay.todolist.unit
 
 import spock.lang.Specification
 
